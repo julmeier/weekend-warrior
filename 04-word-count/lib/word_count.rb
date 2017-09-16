@@ -12,6 +12,7 @@ def words(input_words)
     occurrences = array.count(word)
     hash[word] = occurrences
   end
+  ap hash
   return hash
 
 
