@@ -1,7 +1,8 @@
+# encoding: utf-8
 gem 'minitest', '>= 5.0.0'
 require 'minitest/reporters'
 require 'minitest/autorun'
-require_relative 'alouette'
+require_relative '../lib/alouette'
 
 Minitest::Reporters.use!
 
@@ -9,10 +10,12 @@ describe Alouette do
   describe "lines_for_verse" do
     it "returns an array of strings" do
       lines = Alouette.lines_for_verse(3)
+      puts "lines: #{lines}"
 
       lines.must_be_kind_of Array
 
       lines.each do |line|
+        puts "line: #{line}"
         line.must_be_kind_of String
       end
     end
