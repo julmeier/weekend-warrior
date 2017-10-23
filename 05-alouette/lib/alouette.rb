@@ -2,6 +2,7 @@
 
 class Alouette
 KEYWORDS = ["la tête", "le bec", "les yeux", "le cou", "les ailes", "les pattes", "la queue"]
+ET_KEYWORDS = KEYWORDS.map { |keyword| "Et " + keyword + "!" }
 
 
   ### `lines_for_verse`
@@ -9,26 +10,51 @@ KEYWORDS = ["la tête", "le bec", "les yeux", "le cou", "les ailes", "les pattes
   # ["Et les yeux!", "Et le bec!", "Et la tête!"]
   # Note that verses are 0-indexed.
   def self.lines_for_verse(verse_num)
-    et_keywords = KEYWORDS.map { |keyword| "Et " + keyword + "!" }
-
     lines = []
     (verse_num+1).times do |num|
-      index_array = Array.new(et_keywords[0..num]).reverse!
-      puts "num = #{num}"
+      index_array = Array.new(ET_KEYWORDS[0..num]).reverse!
+      # puts "num = #{num}"
       lines[num] = index_array
-      puts "INSIDER:#{lines[num]}"
+      # puts "INSIDER:#{lines[num]}"
     end
-    puts lines[verse_num]
+    # puts lines[verse_num]
     lines[verse_num]
   end
 
   def self.verse(verse_num)
+    lines = Alouette.lines_for_verse(verse_num)
+    # puts "Lines: #{lines}"
+    verse = ("Je te plumerai " + KEYWORDS[verse_num] + "\n")*2
 
+    lines.each do |line|
+      verse = verse + (line + "\r\n")*2
+    end
+
+    verse_end = "Alouette!" + "\n"
+    verse_end = verse_end + "Alouette!" + "\n"
+    verse_end = verse_end + "A-a-a-ah" + "\n"
+    # puts "Verse_end: #{verse_end}"
+
+    verse = verse + verse_end
+
+    # puts "Verse:"
+    # puts "#{verse}"
+    verse
   end
 
   def self.sing
-    # verse_num = Array.new(8){|index| index}
+    refrain = ""
+    refrain = "Alouette, gentille alouette," + "\n" + "Alouette, je te plumerai." + "\n"
+    # puts "REFRAIN:"
+    # puts refrain
 
+    song = ""
+    3.times do |verse_num|
+      song = song + "\n" + refrain + "\n"+ Alouette.verse(verse_num)
+    end
+
+    puts "**************"
+    puts song
 
 
 
@@ -36,3 +62,5 @@ KEYWORDS = ["la tête", "le bec", "les yeux", "le cou", "les ailes", "les pattes
 end
 #
 # Alouette.lines_for_verse(0)
+# Alouette.verse(2)
+Alouette.sing
