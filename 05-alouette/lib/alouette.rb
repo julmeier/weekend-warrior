@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Alouette
-KEYWORDS = ["la tête", "le bec", "les yeux", "le cou", "les ailes", "les pattes", "la queue"]
+KEYWORDS = ["la tête", "le bec", "les yeux", "le cou", "les ailes", "les pattes", "la queue", "le dos"]
 ET_KEYWORDS = KEYWORDS.map { |keyword| "Et " + keyword + "!" }
 
 
@@ -24,18 +24,13 @@ ET_KEYWORDS = KEYWORDS.map { |keyword| "Et " + keyword + "!" }
   def self.verse(verse_num)
     lines = Alouette.lines_for_verse(verse_num)
     # puts "Lines: #{lines}"
-    verse = ("Je te plumerai " + KEYWORDS[verse_num] + "\n")*2
+    verse = ("Je te plumerai " + KEYWORDS[verse_num] + "." + "\n")*2
 
     lines.each do |line|
       verse = verse + (line + "\r\n")*2
     end
 
-    verse_end = "Alouette!" + "\n"
-    verse_end = verse_end + "Alouette!" + "\n"
-    verse_end = verse_end + "A-a-a-ah" + "\n"
-    # puts "Verse_end: #{verse_end}"
-
-    verse = verse + verse_end
+    verse = verse + "Alouette!\nAlouette!\nA-a-a-ah\n"
 
     # puts "Verse:"
     # puts "#{verse}"
@@ -43,24 +38,25 @@ ET_KEYWORDS = KEYWORDS.map { |keyword| "Et " + keyword + "!" }
   end
 
   def self.sing
-    refrain = ""
-    refrain = "Alouette, gentille alouette," + "\n" + "Alouette, je te plumerai." + "\n"
-    # puts "REFRAIN:"
-    # puts refrain
+    refrain = "Alouette, gentille alouette,\nAlouette, je te plumerai.\n"
 
-    song = ""
-    3.times do |verse_num|
-      song = song + "\n" + refrain + "\n"+ Alouette.verse(verse_num)
+    song = refrain + "\n"
+    8.times do |verse_num|
+      song = song + Alouette.verse(verse_num) + "\n" + refrain
+      # if verse_num = 7
+      #   song = song + "\n"
+      # end
     end
 
     puts "**************"
     puts song
-
+      puts "**************"
+    song
 
 
   end
 end
 #
-# Alouette.lines_for_verse(0)
+# Alouette.lines_for_verse(7)
 # Alouette.verse(2)
-Alouette.sing
+# Alouette.sing
